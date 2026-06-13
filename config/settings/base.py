@@ -19,7 +19,9 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    "apps.accounts",
+]
 
 THIRD_APPS = [
     "rest_framework",
@@ -44,7 +46,7 @@ THIRD_MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
 ]
 
-LOCAL_MIDDLEWARE = []
+LOCAL_MIDDLEWARE: list[str] = []
 
 MIDDLEWARE = DJANGO_MIDDLEWARE + THIRD_MIDDLEWARE + LOCAL_MIDDLEWARE
 
@@ -97,7 +99,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-# AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = "accounts.User"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
