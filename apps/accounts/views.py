@@ -67,4 +67,4 @@ class UserChangePasswordView(APIView):
             new_password=serializer.validated_data["new_password"],
         )
 
-        return Response({"detail": "Contraseña actualizada correctamente"})
+        return Response(status=status.HTTP_204_NO_CONTENT)
