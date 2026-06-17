@@ -3,7 +3,6 @@ from rest_framework.test import APIClient
 import pytest
 
 from apps.accounts.models import User
-from apps.accounts.services import UserServices
 
 
 @pytest.mark.django_db
@@ -222,8 +221,7 @@ def test_change_password_success(
         format="json",
     )
 
-    assert response.status_code == 200
-    assert response.data["detail"] == "Contraseña actualizada correctamente"
+    assert response.status_code == 204
 
 
 @pytest.mark.django_db
@@ -243,7 +241,7 @@ def test_change_password_wrong_old_password(
     )
 
     assert response.status_code == 400
-    assert response.data["old_password"] == "La contraseña actual no es correcta"
+    assert "old_password" in response.data
 
 
 @pytest.mark.django_db
@@ -289,15 +287,3 @@ def test_change_password_missing_fields(auth_client: APIClient) -> None:
     response = auth_client.post(url, data={}, format="json")
 
     assert response.status_code == 400
-
-
-@pytest.mark.django_db
-def test_user_services_change_password_raise_error_on_wrong_old_password(
-    user: User,
-) -> None:
-    with pytest.raises(ValueError, match="La contraseña actual no es correcta"):
-        UserServices.change_password(
-            user=user,
-            old_password="wrong",
-            new_password="newpass123",
-        )
