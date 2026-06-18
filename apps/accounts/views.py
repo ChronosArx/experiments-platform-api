@@ -54,11 +54,7 @@ class UserLoginView(TokenObtainPairView):
     tags=["Auth"],
     summary="Change user password",
     request=ChangePasswordSerializer,
-    responses={
-        200: inline_serializer(
-            name="ChangePasswordResponse", fields={"datail": serializers.CharField()}
-        )
-    },
+    responses={204: None},
 )
 class UserChangePasswordView(APIView):
     authentication_classes = [JWTAuthentication]
