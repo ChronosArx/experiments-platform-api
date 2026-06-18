@@ -18,7 +18,12 @@ from apps.accounts.serializers import (
 from apps.accounts.services import UserServices
 
 
-@extend_schema(auth=[], responses={201: UserRestrationResponseSerializer})
+@extend_schema(
+    tags=["Auth"],
+    summary="Register a new user",
+    auth=[],
+    responses={201: UserRestrationResponseSerializer},
+)
 class UserRegistrationView(generics.CreateAPIView[User]):
     serializer_class = UserRegistrationSerializer
 
@@ -40,12 +45,14 @@ class UserRegistrationView(generics.CreateAPIView[User]):
         return Response(response_serializer.data, status=status.HTTP_201_CREATED)
 
 
-@extend_schema()
+@extend_schema(tags=["Auth"], summary="User login")
 class UserLoginView(TokenObtainPairView):
     pass
 
 
 @extend_schema(
+    tags=["Auth"],
+    summary="Change user password",
     request=ChangePasswordSerializer,
     responses={
         200: inline_serializer(
