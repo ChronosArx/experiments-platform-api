@@ -21,6 +21,7 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     "apps.accounts",
+    "apps.experiments",
 ]
 
 THIRD_APPS = [
