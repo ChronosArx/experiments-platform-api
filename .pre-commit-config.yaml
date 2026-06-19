@@ -1,0 +1,14 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace      # Elimina espacios en blanco al final de las líneas
+      - id: end-of-file-fixer        # Asegura una línea en blanco al final de los archivos
+      - id: check-yaml               # Valida la sintaxis de archivos .yaml o .yml
+      - id: check-added-large-files  # Evita subir archivos pesados por error (ej. >500kb)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.17  
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
