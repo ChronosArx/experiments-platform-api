@@ -1,8 +1,12 @@
+import csv
+import io
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework.test import APIClient
 import pytest
 
 from apps.accounts.models import User
-from apps.experiments.models import Experiment
+from apps.experiments.models import Dataset, Experiment
 
 
 @pytest.fixture
@@ -41,5 +45,28 @@ def experiment(user: User) -> Experiment:
     return Experiment.objects.create(
         title="Test experiment",
         description="Test description",
+        owner=user,
+    )
+
+
+@pytest.fixture
+def csv_file() -> SimpleUploadedFile:
+    buffer = io.StringIO()
+    writer = csv.writer(buffer)
+    writer.writerow(["col1", "col2"])
+    writer.writerow(["val1", "val2"])
+    return SimpleUploadedFile(
+        "test.csv",
+        buffer.getvalue().encode("utf-8"),
+        content_type="text/csv",
+    )
+
+
+@pytest.fixture
+def dataset(user: User, csv_file: SimpleUploadedFile) -> Dataset:
+    return Dataset.objects.create(
+        name="Test dataset",
+        version="1.0",
+        file=csv_file,
         owner=user,
     )
