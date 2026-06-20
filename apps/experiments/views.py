@@ -4,6 +4,7 @@ from django.http import FileResponse
 from rest_framework import generics, mixins, permissions, viewsets
 from rest_framework.decorators import action
 from drf_spectacular.utils import extend_schema
+from rest_framework.parsers import MultiPartParser
 
 from apps.accounts.models import User
 from apps.experiments.models import Dataset, Experiment
@@ -24,6 +25,7 @@ class ExperimentViewSet(viewsets.ModelViewSet[Experiment]):
 
 @extend_schema(tags=["Datasets"])
 class DatasetUploadView(generics.CreateAPIView[Dataset]):
+    parser_classes = [MultiPartParser]
     serializer_class = DatasetSerializer
     permission_classes = [permissions.IsAuthenticated]
 
