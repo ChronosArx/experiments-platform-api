@@ -128,4 +128,5 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Este proyecto se centra en la creación de experimentos de modelos de ML clasico y comparar su rendimiento.",
     "VERSION": "0.1.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,
 }
