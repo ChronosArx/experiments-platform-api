@@ -21,6 +21,7 @@ DJANGO_APPS = [
 
 LOCAL_APPS = [
     "apps.accounts",
+    "apps.experiments",
 ]
 
 THIRD_APPS = [
@@ -108,6 +109,8 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+MEDIA_ROOT = BASE_DIR / "media"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -125,4 +128,5 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Este proyecto se centra en la creación de experimentos de modelos de ML clasico y comparar su rendimiento.",
     "VERSION": "0.1.0",
     "SERVE_INCLUDE_SCHEMA": False,
+    "COMPONENT_SPLIT_REQUEST": True,
 }

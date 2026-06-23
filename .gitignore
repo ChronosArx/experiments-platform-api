@@ -19,3 +19,9 @@ wheels/
 
 # Databese
 *.sqlite3
+
+# Agents
+AGENTS.md
+
+# Files
+media/*
