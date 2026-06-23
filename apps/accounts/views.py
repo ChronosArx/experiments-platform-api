@@ -20,6 +20,7 @@ from apps.accounts.services import UserServices
 
 @extend_schema(
     tags=["Auth"],
+    summary="Register a new user",
     auth=[],
     responses={201: UserRestrationResponseSerializer},
 )
@@ -44,13 +45,14 @@ class UserRegistrationView(generics.CreateAPIView[User]):
         return Response(response_serializer.data, status=status.HTTP_201_CREATED)
 
 
-@extend_schema(tags=["Auth"])
+@extend_schema(tags=["Auth"], summary="User login")
 class UserLoginView(TokenObtainPairView):
     pass
 
 
 @extend_schema(
     tags=["Auth"],
+    summary="Change user password",
     request=ChangePasswordSerializer,
     responses={204: None},
 )
