@@ -14,18 +14,3 @@ class Experiment(models.Model):
 
     def __str__(self) -> str:
         return self.title
-
-
-class Dataset(models.Model):
-    name = models.CharField(max_length=255)
-    version = models.CharField(max_length=50)
-    file = models.FileField(upload_to="csv/")
-    owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="datasets",
-    )
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self) -> str:
-        return self.name
